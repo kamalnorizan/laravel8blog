@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,14 +33,13 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/post',[App\Http\Controllers\PostController::class,'index'])->name('posts.index');
-Route::get('/post/create',[App\Http\Controllers\PostController::class,'create'])->name('posts.create');
-Route::post('/post',[App\Http\Controllers\PostController::class,'store'])->name('posts.store');
-Route::get('/post/{post}/edit',[App\Http\Controllers\PostController::class,'edit'])->name('posts.edit');
-Route::put('/post/{post}',[App\Http\Controllers\PostController::class,'update'])->name('posts.update');
+// Route::get('/post',[App\Http\Controllers\PostController::class,'index'])->name('posts.index');
+// Route::get('/post/create',[App\Http\Controllers\PostController::class,'create'])->name('posts.create');
+// Route::post('/post',[App\Http\Controllers\PostController::class,'store'])->name('posts.store');
+// Route::get('/post/{post}/edit',[App\Http\Controllers\PostController::class,'edit'])->name('posts.edit');
+// Route::put('/post/{post}',[App\Http\Controllers\PostController::class,'update'])->name('posts.update');
+Route::resource('posts', PostController::class)->except(['show','destroy']);
 Route::get('/post/delete/{post}',[App\Http\Controllers\PostController::class,'destroy'])->name('posts.delete');
-
-// Route::resource('category', [App\Http\Controllers\CategoryController::class]);
 
 Route::get('/category',[App\Http\Controllers\CategoryController::class,'index'])->name('category.index');
 Route::get('/category/create',[App\Http\Controllers\CategoryController::class,'create'])->name('category.create');
