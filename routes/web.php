@@ -29,7 +29,7 @@ Route::get('/exercise', function () {
 Route::get('/hello', [HomeController::class,'index']);
 Route::get('/exercisecontroller', [HomeController::class,'exercise']);
 
-Auth::routes();
+Auth::routes(['register'=>false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
