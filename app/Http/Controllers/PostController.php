@@ -116,6 +116,13 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        if($post->user_id==Auth::user()->id){
+            $post->delete();
+            flash('Post deleted successfully')->error()->important();
+        }else{
+            flash('You are not allowed to remove this post')->error()->important();
+        }
+        
+        return back();
     }
 }

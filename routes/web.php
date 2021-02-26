@@ -37,6 +37,7 @@ Route::get('/post/create',[App\Http\Controllers\PostController::class,'create'])
 Route::post('/post',[App\Http\Controllers\PostController::class,'store'])->name('posts.store');
 Route::get('/post/{post}/edit',[App\Http\Controllers\PostController::class,'edit'])->name('posts.edit');
 Route::put('/post/{post}',[App\Http\Controllers\PostController::class,'update'])->name('posts.update');
+Route::get('/post/delete/{post}',[App\Http\Controllers\PostController::class,'destroy'])->name('posts.delete');
 
 // Route::resource('category', [App\Http\Controllers\CategoryController::class]);
 

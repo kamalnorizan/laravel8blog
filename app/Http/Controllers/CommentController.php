@@ -85,7 +85,7 @@ class CommentController extends Controller
         $comment = Comment::find($request->comment_id);
         $comment->content = $request->content;
         $comment->save();
-
+        // Comment::find($request->comment_id)->update($request->all());
         flash('Comment updated successfully')->success()->important();
         return back();
     }

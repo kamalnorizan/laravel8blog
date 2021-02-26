@@ -15,7 +15,10 @@
                 <div class="card-header">
                     {{$post->title}} ~ {{$post->user->name}}
                     @if ($post->user_id==Auth::user()->id)
+                        <a href="{{route('posts.delete',['post'=>$post->id])}}" class="btn btn-danger btn-sm float-right" onclick="return confirm('Are you sure you want to delete this post? Your action cannot be undone.')">Delete</a>
+                        &nbsp;
                         <a href="{{route('posts.edit',['post'=>$post->id])}}" class="btn btn-info btn-sm float-right">Edit</a>
+                        &nbsp;
                     @endif
                 </div>
                 <div class="card-body">
@@ -54,6 +57,7 @@
     <br>
     @endforeach
     {{$posts->links()}}
+
 </div>
 <!-- Button trigger modal -->
 
