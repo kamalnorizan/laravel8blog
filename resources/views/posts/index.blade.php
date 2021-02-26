@@ -95,7 +95,9 @@
         $('#editComment_mdl').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget);
             var data = button.data('comment');
-            console.log(data);
+
+            $('#comment_id_mdl').val(data['id']);
+            $('#content_mdl').val(data['content']);
         });
     });
 </script>
