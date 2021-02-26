@@ -80,9 +80,14 @@ class CommentController extends Controller
      * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Comment $comment)
+    public function update(Request $request)
     {
-        //
+        $comment = Comment::find($request->comment_id);
+        $comment->content = $request->content;
+        $comment->save();
+
+        flash('Comment updated successfully')->success()->important();
+        return back();
     }
 
     /**
