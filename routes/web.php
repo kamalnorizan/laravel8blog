@@ -35,7 +35,10 @@ Auth::routes(['register'=>false]);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::middleware(['auth'])->group(function () {
-    Route::resource('posts', PostController::class)->except(['show','destroy','store']);
+    Route::resource('posts', PostController::class)->except(['index','show','destroy','store']);
+
+    Route::get('/posts', [App\Http\Controllers\PostController::class,'index'])->name('posts.index')->middleware(['role_or_permission:publisher|show post|edit post|delete post|create post']);
+
     Route::post('/posts',[App\Http\Controllers\PostController::class,'store'])->name('posts.store')->middleware('checkpublishdate');
     Route::get('/posts/delete/{post}',[App\Http\Controllers\PostController::class,'destroy'])->name('posts.delete');
 
@@ -49,4 +52,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/comment', [App\Http\Controllers\CommentController::class,'store'])->name('comment.store');
     Route::post('/comment/update', [App\Http\Controllers\CommentController::class,'update'])->name('comment.update');
     Route::delete('/comment/{comment}', [App\Http\Controllers\CommentController::class, 'destroy'])->name('comment.delete');
+
+
+    Route::get('/user',[App\Http\Controllers\UserController::class,'index'])->name('user.index');
+    Route::post('/user/assignpermissiontorole',[App\Http\Controllers\UserController::class,'assignpermissiontorole'])->name('user.assignpermissiontorole');
+    Route::post('/user/assignroletouser',[App\Http\Controllers\UserController::class,'assignroletouser'])->name('user.assignroletouser');
 });
