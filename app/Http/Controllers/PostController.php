@@ -4,11 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Auth;
+use Mail;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -54,8 +60,22 @@ class PostController extends Controller
         $post->user_id = Auth::user()->id;
         $post->save();
 
+        $user = User::find(20);
+        $emailTo = $user->email;
+        $name = $user->name;
+
+        Mail::send('posts.mail', compact('post'), function ($message) use ($emailTo, $name) {
+            $message->from('john@johndoe.com', 'John Doe');
+            $message->sender('john@johndoe.com', 'John Doe');
+            $message->to( $emailTo, $name);
+            $message->replyTo('john@johndoe.com', 'John Doe');
+            $message->subject('Mail test from Laravel 8 Blog');
+            $message->priority(3);
+        });
+
+
         flash('New Post stored successfully')->success()->important();
-        return redirect('/post');
+        return redirect('/posts');
 
     }
 
@@ -105,7 +125,7 @@ class PostController extends Controller
         $post->save();
 
         flash('Post updated successfully')->success()->important();
-        return redirect('/post');
+        return redirect('/posts');
     }
 
     /**
@@ -122,7 +142,7 @@ class PostController extends Controller
         }else{
             flash('You are not allowed to remove this post')->error()->important();
         }
-        
+
         return back();
     }
 }
