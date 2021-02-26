@@ -45,3 +45,6 @@ Route::get('/category/create',[App\Http\Controllers\CategoryController::class,'c
 Route::post('/category',[App\Http\Controllers\CategoryController::class,'store'])->name('category.store');
 Route::get('/category/{category}/edit',[App\Http\Controllers\CategoryController::class,'edit'])->name('category.edit');
 Route::put('/category/{category}',[App\Http\Controllers\CategoryController::class,'update'])->name('category.update');
+
+//comment
+Route::post('/comment', [App\Http\Controllers\CommentController::class,'store'])->name('comment.store');

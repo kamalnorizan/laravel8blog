@@ -22,6 +22,19 @@
                    {{$post->content}}
                     <hr>
                     <h3>Comments</h3>
+                    {!! Form::open(['method' => 'POST', 'route' => 'comment.store']) !!}
+                        {!! Form::hidden('post_id', $post->id, ['id'=>'post_id']) !!}
+                        <div class="form-group{{ $errors->has('content') ? ' has-error' : '' }}">
+                            {!! Form::textarea('content', null, ['class' => 'form-control', 'required' => 'required','rows'=>'3']) !!}
+                            <small class="text-danger">{{ $errors->first('content') }}</small>
+                        </div>
+
+                        <div class="btn-group float-right">
+                            {!! Form::submit("Submit", ['class' => 'btn btn-success']) !!}
+                        </div>
+                    {!! Form::close() !!}
+                    <br><br>
+                    <hr>
                     @forelse ($post->comments as $comment)
                         - {{$comment->content}} ~ {{$comment->user->name}} <br>
                     @empty
