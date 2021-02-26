@@ -98,6 +98,9 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        //
+        $comment->delete();
+        // Comment::destroy($comment->id);
+        flash('Comment removed successfully')->error()->important();
+        return back();
     }
 }

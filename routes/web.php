@@ -50,3 +50,4 @@ Route::put('/category/{category}',[App\Http\Controllers\CategoryController::clas
 //comment
 Route::post('/comment', [App\Http\Controllers\CommentController::class,'store'])->name('comment.store');
 Route::post('/comment/update', [App\Http\Controllers\CommentController::class,'update'])->name('comment.update');
+Route::delete('/comment/{comment}', [App\Http\Controllers\CommentController::class, 'destroy'])->name('comment.delete');

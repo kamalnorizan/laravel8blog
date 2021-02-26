@@ -42,7 +42,10 @@
                     - {{$comment->content}} ~ {{$comment->user->name}}
 
                     @if ($comment->user_id==Auth::user()->id)
+                    {!! Form::open(['method' => 'DELETE', 'route' => ['comment.delete',$comment->id]]) !!}
                         <button type="button" class="btn btn-link btn-sm" data-toggle="modal" data-target="#editComment_mdl" data-comment="{{$comment}}"> Edit Comment </button>
+                        <button type="submit" class="btn btn-link btn-sm deletecomment" > Delete Comment </button>
+                    {!! Form::close() !!}
                     @endif
 
                     <br>
@@ -102,6 +105,13 @@
 
             $('#comment_id_mdl').val(data['id']);
             $('#content_mdl').val(data['content']);
+        });
+
+        $('.deletecomment').click(function(e){
+            e.preventDefault();
+            if(confirm('Are you sure you want to delete this comment? Your action cannot be undone.')){
+                $(e.target).closest('form').submit();
+            }
         });
     });
 </script>
